@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticulosFamilias, ArticuloFamilia} from '../../models/articulos-familias';
 
 @Component({
   selector: 'app-articulos-familias',
