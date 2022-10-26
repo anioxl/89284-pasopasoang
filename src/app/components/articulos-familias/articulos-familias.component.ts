@@ -7,6 +7,8 @@ import { ArticulosFamilias, ArticuloFamilia} from '../../models/articulos-famili
   styleUrls: ['./articulos-familias.component.css']
 })
 export class ArticulosFamiliasComponent implements OnInit {
+  Items = ArticuloFamilia;
+  Titulo = "Articulos Familias"
 
   constructor() { }
 
