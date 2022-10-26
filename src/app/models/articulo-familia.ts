@@ -1,8 +1,8 @@
-export interface ArticulosFamilias {
+export interface ArticuloFamilia {
   IdArticuloFamilia: number;
   Nombre: string;
 }
-export const ArticuloFamilia: ArticulosFamilias[] = [
+export const ArticulosFamilias: ArticuloFamilia[] = [
   { IdArticuloFamilia: 1, Nombre: "Accesorios" },
   { IdArticuloFamilia: 2, Nombre: "Audio" },
   { IdArticuloFamilia: 3, Nombre: "Celulares" },
