@@ -21,9 +21,7 @@ export class ArticulosFamiliasComponent implements OnInit {
     this.GetFamiliasArticulos();
   }
   GetFamiliasArticulos() {
-    this.articulosFamiliasService.get()
-    .subscribe((res:ArticuloFamilia[]) => {
-      this.Items = res;
+    this.articulosFamiliasService.get().subscribe((res:ArticuloFamilia[]) => {this.Items = res;
     });
   }
 }
