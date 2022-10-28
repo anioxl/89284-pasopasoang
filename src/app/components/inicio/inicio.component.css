@@ -8,7 +8,4 @@ div::after {
   right: 0;
   position: absolute;
   z-index: -1;
-
-  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwn4XdTpZfJZ4zxbLxbPMKDzcNb_LeYvk4Qw&usqp=CAU");
-  background-repeat: no-repeat;
 }
