@@ -4,6 +4,7 @@ import { ArticuloFamilia } from "../../models/articulo-familia";
 import { MockArticulosService } from "../../services/mock-articulos.service";
 import { MockArticulosFamiliasService } from "../../services/mock-articulos-familias.service";
 import {  FormGroup, FormControl, Validators } from "@angular/forms";
+import { ModalDialogService } from "../../services/modal-dialog.service";
 
 import { ArticulosService } from '../../services/articulos.service';
 import { ArticulosFamiliasService } from '../../services/articulos-familias.service';
@@ -71,6 +72,7 @@ export class ArticulosComponent implements OnInit {
     // private articulosFamiliasService: MockArticulosFamiliasService,
     private articulosService: ArticulosService,
     private articulosFamiliasService: ArticulosFamiliasService,
+    private modalDialogService: ModalDialogService,
   ) {}
  
   ngOnInit() {
@@ -91,6 +93,7 @@ export class ArticulosComponent implements OnInit {
  
   // Buscar segun los filtros, establecidos en FormRegistro
   Buscar() {
+    this.modalDialogService.BloquearPantalla();
     this.articulosService
       .get(
         this.FormBusqueda.value.Nombre,
@@ -100,6 +103,7 @@ export class ArticulosComponent implements OnInit {
       .subscribe((res: any) => {
         this.Items = res.Items;
         this.RegistrosTotal = res.RegistrosTotal;
+        this.modalDialogService.DesbloquearPantalla();
       });
   }
  
@@ -127,7 +131,7 @@ export class ArticulosComponent implements OnInit {
   // comienza la modificacion, luego la confirma con el metodo Grabar
   Modificar(Item) {
     if (!Item.Activo) {
-      alert("No puede modificarse un registro Inactivo.");
+      this.modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
     this.BuscarPorId(Item, "M");
@@ -176,17 +180,20 @@ export class ArticulosComponent implements OnInit {
         });
     }
   }
-  ActivarDesactivar(Item: Articulo) {
-    var resp = confirm(
+  ActivarDesactivar(Item) {
+    this.modalDialogService.Confirm(
       'Esta seguro de ' +
         (Item.Activo ? 'desactivar' : 'activar') +
-        ' este registro?'
-    );
-    if (resp === true) {
-      this.articulosService
-        .delete(Item.IdArticulo)
-        .subscribe((res: any) => this.Buscar());
-    }
+        ' este registro?',
+      undefined,
+      undefined,
+      undefined,
+      () =>
+        this.articulosService
+          .delete(Item.IdArticulo)
+          .subscribe((res: any) => this.Buscar()),
+      null
+      );
   }
  
   // Volver desde Agregar/Modificar

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from "@angular/forms";
-import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import { NgbPaginationModule,  NgbModalModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
@@ -13,10 +13,11 @@ import { ArticulosComponent } from './components/articulos/articulos.component';
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
   
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, HttpClientModule, NgbPaginationModule, 
+  imports:      [ BrowserModule, FormsModule, HttpClientModule, NgbPaginationModule, NgbModalModule,
     ReactiveFormsModule, 
     RouterModule.forRoot([
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -24,10 +25,16 @@ import {APP_BASE_HREF} from '@angular/common';
     { path: 'articulosfamilias', component: ArticulosFamiliasComponent },
     { path: 'articulos', component: ArticulosComponent }
   ]) ],
-  declarations: [ AppComponent, HelloComponent, InicioComponent, ArticulosFamiliasComponent, MenuComponent, ArticulosComponent ],
-  bootstrap:    [ AppComponent ],
-  providers: [
-    { provide: APP_BASE_HREF, useValue: '/' }]
+  
+  declarations: [ AppComponent, HelloComponent, InicioComponent, ArticulosFamiliasComponent, MenuComponent, 
+    ArticulosComponent, ModalDialogComponent ],
+  
+    bootstrap:    [ AppComponent ],
+  
+    providers: [
+    { provide: APP_BASE_HREF, useValue: '/' }],
+  
+    entryComponents: [ModalDialogComponent]
 })
 export class AppModule { }
 
