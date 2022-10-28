@@ -69,19 +69,24 @@ export class ArticulosComponent implements OnInit {
   }
  
   GetFamiliasArticulos() {
-         this.articulosFamiliasService.get().subscribe((res: ArticuloFamilia[]) => {
-       this.Familias = res;
-     });
+    this.articulosFamiliasService.get().subscribe((res: ArticuloFamilia[]) => {
+    this.Familias = res;
+    });
   }
  
   Agregar() {
     this.AccionABMC = "A";
+    this.FormRegistro.reset({ Activo: true, IdArticulo: 0 });
   }
  
   // Buscar segun los filtros, establecidos en FormRegistro
   Buscar() {
-     this.articulosService
-      .get('', null, this.Pagina)
+    this.articulosService.get('', null, this.Pagina).subscribe((res: any) => {
+      this.Items = res.Items;
+      this.RegistrosTotal = res.RegistrosTotal;
+    });
+    this.articulosService
+      .get(this.FormBusqueda.value.Nombre, this.FormBusqueda.value.Activo, this.Pagina)
       .subscribe((res: any) => {
         this.Items = res.Items;
         this.RegistrosTotal = res.RegistrosTotal;
