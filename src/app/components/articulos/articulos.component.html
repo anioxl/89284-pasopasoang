@@ -177,8 +177,7 @@
               <input type="text" name="CodigoDeBarra" class="form-control" formControlName="CodigoDeBarra"
               [ngClass]="{'is-invalid': (FormRegistro.controls['CodigoDeBarra'].touched || submitted)  
                   && FormRegistro.controls['CodigoDeBarra'].errors}"/>
-                   Dato requerido.
-            </div>
+                   Dato requerido.            
             <div class="validacion" *ngIf="(FormRegistro.controls['Stock'].touched || submitted) 
                           && FormRegistro.controls['Stock'].hasError('pattern')">
               Dato numérico, 13 dígitos.
@@ -240,20 +239,19 @@
 
   <!-- Botones Grabar, Cancelar/Volver' -->
   <div class="row justify-content-center">
-      <button type="button" class="btn btn-primary" (click)="Grabar()"
-      *ngIf=" AccionABMC == 'A'  || AccionABMC == 'M'">
+      <button type="button" *ngIf="AccionABMC!=='C'" class="btn btn-primary" (click)="Grabar()">
           <i class="fa fa-check"></i> Grabar
       </button>
       &nbsp;
       <button type="button" class="btn btn-warning" (click)="Volver()">
           <i class="fa fa-undo"></i> 
-          {{AccionABMC == 'A'  || AccionABMC == 'M' ? 'Cancelar' : 'Volver'}}
+          {{AccionABMC=='C' ? 'Volver' : 'Cancelar'}}
       </button>
   </div>
 
   <!--texto: Revisar los datos ingresados...-->
-  <div id="divMsjFormRegistro" class="row alert alert-danger" *ngIf="false">
-      <i class="fa fa-exclamation-sign"></i>{{Mensajes['RD']}}
+  <div *ngIf="submitted && FormRegistro.invalid" class="row alert alert-danger mensajesAlert">
+    <i class="fa fa-exclamation-sign"></i>{{Mensajes['RD']}}
   </div>
 
 </form>
