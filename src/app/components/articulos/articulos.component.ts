@@ -3,14 +3,10 @@ import { Articulo} from "../../models/articulo";
 import { ArticuloFamilia } from "../../models/articulo-familia";
 import { MockArticulosService } from "../../services/mock-articulos.service";
 import { MockArticulosFamiliasService } from "../../services/mock-articulos-familias.service";
+import {  FormGroup, FormControl, Validators } from "@angular/forms";
 
 // import { ArticulosService } from '../../services/articulos.service';
 // import { ArticulosFamiliasService } from '../../services/articulos-familias.service';
-// import {
-//   FormGroup,
-//   FormControl,
-//   Validators,
-// } from '@angular/forms';
 // import { ModalDialogService } from '../../services/modal-dialog.service';
 
 @Component({
@@ -45,6 +41,22 @@ export class ArticulosComponent implements OnInit {
     { Id: true, Nombre: "SI" },
     { Id: false, Nombre: "NO" }
   ];
+
+  FormBusqueda = new FormGroup({
+    Nombre: new FormControl(null),
+    Activo: new FormControl(null),
+  });
+
+  FormRegistro = new FormGroup({
+    IdArticulo: new FormControl(0),
+    Nombre: new FormControl(''),
+    Precio: new FormControl(null),
+    Stock: new FormControl(null),
+    CodigoDeBarra: new FormControl (''),
+    IdArticuloFamilia: new FormControl(''),
+    FechaAlta: new FormControl(''),
+    Activo: new FormControl(true),
+  });
  
  
   constructor(
