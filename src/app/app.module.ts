@@ -10,7 +10,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { ArticulosFamiliasComponent } from './components/articulos-familias/articulos-familias.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ArticulosComponent } from './components/articulos/articulos.component';
-import { HttpClientModule } from "@angular/common/http";
+import { MyInterceptor } from "./shared/my-interceptor";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
@@ -32,7 +33,9 @@ import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.com
     bootstrap:    [ AppComponent ],
   
     providers: [
-    { provide: APP_BASE_HREF, useValue: '/' }],
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }
+  ],
   
     entryComponents: [ModalDialogComponent]
 })
